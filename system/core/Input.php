@@ -620,7 +620,8 @@ class CI_Input {
 			{
 				if (($cookie_key = $this->_clean_input_keys($key)) !== FALSE)
 				{
-					$_COOKIE[$cookie_key] = $this->_clean_input_data($val);
+					if ( ! config_item('sess_encrypt_cookie') === TRUE OR $key != config_item('sess_cookie_name'))
+    						$_COOKIE[$this->_clean_input_keys($key)] = $this->_clean_input_data($val);
 				}
 				else
 				{
